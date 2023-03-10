@@ -29,7 +29,7 @@ class App {
     so that req.ip returns the client's IP instead of the proxy's IP.
     (you can also use req.headers["x-forwarded-for"] but)
     */
-    // this.app.set("trust proxy", "127.0.0.1")
+    this.app.set('trust proxy', '127.0.0.1');
     this.app.disable('x-powered-by');
   }
 
@@ -38,7 +38,6 @@ class App {
     this.app.use(cors({ origin: process.env.ORIGIN }));
     this.app.use(express.json({ limit: '100mb' }));
     this.app.use(express.urlencoded({ extended: true, limit: '100mb' }));
-    this.app.use(express.raw({ type: 'application/octet-stream', limit: '100mb' }));
     this.app.use(httpLogger);
   }
 
