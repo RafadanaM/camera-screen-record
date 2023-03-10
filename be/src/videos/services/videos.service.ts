@@ -4,9 +4,8 @@ const UPLOAD_DIR = './uploads';
 
 class VideosService {
   async createVideo(id: string, data: string, chunkCount: number) {
-    const base64String = data.split(',').pop();
+    const base64String = data.toString().split(',').pop();
     if (base64String === undefined) return;
-    const buffer = Buffer.from(base64String, 'base64');
     const fileName = `${id}.webm`;
     const isFileExist = await fs
       .access(`${UPLOAD_DIR}/${fileName}`)
@@ -17,7 +16,7 @@ class VideosService {
       await fs.unlink(`${UPLOAD_DIR}/${fileName}`);
     }
 
-    await fs.appendFile(`${UPLOAD_DIR}/${fileName}`, buffer);
+    await fs.appendFile(`${UPLOAD_DIR}/${fileName}`, base64String, { encoding: 'base64' });
   }
 }
 

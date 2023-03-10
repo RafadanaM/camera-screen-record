@@ -38,6 +38,7 @@ class App {
     this.app.use(cors({ origin: process.env.ORIGIN }));
     this.app.use(express.json({ limit: '100mb' }));
     this.app.use(express.urlencoded({ extended: true, limit: '100mb' }));
+    this.app.use(express.raw({ type: 'application/octet-stream', limit: '100mb' }));
     this.app.use(httpLogger);
   }
 

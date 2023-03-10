@@ -57,7 +57,7 @@ function App() {
           `${import.meta.env.VITE_API_URL}/videos/${cameraRecordId}`,
           {
             data: base64Data,
-            cameraRecordCount,
+            chunkNumber: cameraRecordCount,
           }
         );
         cameraRecordCount += 1;
@@ -79,7 +79,7 @@ function App() {
           `${import.meta.env.VITE_API_URL}/videos/${screenRecordId}`,
           {
             data: base64Data,
-            screenRecordCount,
+            chunkNumber: screenRecordCount,
           }
         );
         screenRecordCount += 1;
@@ -126,6 +126,12 @@ function App() {
           counter={counter}
           isCounting={intervalDelay > 0}
         />
+        <span className={styles.instruction}>
+          Please <b> ALLOW</b> Camera and Screen Permission
+        </span>
+        <span className={styles.instruction}>
+          Please select <b> THIS SCREEN</b> to share
+        </span>
         <span className={styles.instruction}>
           Please align yourself with the outline on the video preview and press
           <b> START</b> to continue

@@ -23,7 +23,8 @@ class VideosController implements BaseController {
 
   async createVideoHandler(req: createVideoRequest, res: BaseResponse, next: NextFunction) {
     try {
-      this.videosService.createVideo(req.params.id, req.body.data, req.body.count);
+      console.log(req.body);
+      this.videosService.createVideo(req.params.id, req.body.data, req.body.chunkNumber);
       return res.status(201).send({ message: 'video created', statusCode: 201 });
     } catch (error) {
       return next(error);
