@@ -29,6 +29,7 @@ function useMediaStream(type: "camera" | "screen" = "camera") {
       setIsPlaying(true);
       return stream.current;
     } catch (error) {
+      console.log(error);
       return null;
     }
   }, [type]);

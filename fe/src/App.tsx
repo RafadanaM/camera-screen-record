@@ -32,6 +32,7 @@ function App() {
     onDataAvailable: onCameraDataAvailable,
     record: recordCamera,
     stop: stopRecordCamera,
+    recordingStatus: cameraRecordingStatus,
   } = useMediaRecord(cameraStream.current);
   const {
     onDataAvailable: onScreenDataAvailable,
@@ -129,10 +130,11 @@ function App() {
           Please align yourself with the outline on the video preview and press
           <b> START</b> to continue
         </span>
-
-        <Button type="button" onClick={startRecording}>
-          START
-        </Button>
+        {cameraRecordingStatus === "idle" ? (
+          <Button type="button" onClick={startRecording}>
+            START
+          </Button>
+        ) : null}
       </div>
 
       <img
