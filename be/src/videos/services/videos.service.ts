@@ -4,7 +4,7 @@ const UPLOAD_DIR = './uploads';
 
 class VideosService {
   async createVideo(id: string, data: string, chunkCount: number) {
-    const base64String = data.toString().split(',').pop();
+    const base64String = data.split(',').pop();
     if (base64String === undefined) return;
     const fileName = `${id}.webm`;
     const isFileExist = await fs
