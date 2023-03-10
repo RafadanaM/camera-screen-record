@@ -23,7 +23,11 @@ function App() {
     play: playCamera,
     stream: cameraStream,
   } = useMediaStream("camera");
-  const { play: playScreen, stream: screenStream } = useMediaStream("screen");
+  const {
+    play: playScreen,
+    stream: screenStream,
+    stop: stopScreen,
+  } = useMediaStream("screen");
   const {
     onDataAvailable: onCameraDataAvailable,
     record: recordCamera,
@@ -110,6 +114,7 @@ function App() {
   useTimeout(() => {
     stopRecordCamera();
     stopRecordScreen();
+    stopScreen();
   }, timeoutDelay);
 
   return (
