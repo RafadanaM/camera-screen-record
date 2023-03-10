@@ -15,7 +15,7 @@ function useMediaRecord(stream: MediaStream | null) {
     setRecordingStatus("recording");
     const recorder = new MediaRecorder(stream, { mimeType });
     mediaRecorderRef.current = recorder;
-    mediaRecorderRef.current.start(500);
+    mediaRecorderRef.current.start(5000);
   }, [stream]);
 
   const stop = useCallback(() => {
