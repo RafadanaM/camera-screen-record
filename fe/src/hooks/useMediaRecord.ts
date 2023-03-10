@@ -15,7 +15,7 @@ function useMediaRecord(stream: MediaStream | null) {
     setRecordingStatus("recording");
     const recorder = new MediaRecorder(stream, { mimeType });
     mediaRecorderRef.current = recorder;
-    mediaRecorderRef.current.start();
+    mediaRecorderRef.current.start(2000);
   }, [stream]);
 
   const stop = useCallback(() => {
@@ -29,6 +29,7 @@ function useMediaRecord(stream: MediaStream | null) {
   const onDataAvailable = useCallback(
     (cb: ((this: MediaRecorder, ev: BlobEvent) => any) | null) => {
       if (!mediaRecorderRef.current) return;
+
       mediaRecorderRef.current.ondataavailable = cb;
     },
     []
