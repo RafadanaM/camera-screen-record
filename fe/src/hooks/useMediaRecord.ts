@@ -2,9 +2,10 @@
 import { useCallback, useRef, useState } from "react";
 import { RecordingStatus } from "../types";
 
-const mimeType = 'video/webm; codecs="opus,vp8"';
-
-function useMediaRecord(stream: MediaStream | null) {
+function useMediaRecord(
+  stream: MediaStream | null,
+  mimeType = 'video/webm; codecs="opus,vp8"'
+) {
   const [recordingStatus, setRecordingStatus] =
     useState<RecordingStatus>("idle");
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
@@ -15,8 +16,8 @@ function useMediaRecord(stream: MediaStream | null) {
     setRecordingStatus("recording");
     const recorder = new MediaRecorder(stream, { mimeType });
     mediaRecorderRef.current = recorder;
-    mediaRecorderRef.current.start(500);
-  }, [stream]);
+    mediaRecorderRef.current.start(1000);
+  }, [mimeType, stream]);
 
   const stop = useCallback(() => {
     setRecordingStatus("idle");

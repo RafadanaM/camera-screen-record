@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { nanoid } from "nanoid";
 import axios from "axios";
 import styles from "./App.module.css";
 import VideoRecord from "./components/VideoRecord/VideoRecord";
@@ -10,7 +9,7 @@ import useInterval from "./hooks/useInterval";
 import spider from "./assets/mantap.jpg";
 import music from "./assets/music.mp3";
 import useTimeout from "./hooks/useTimeout";
-import { blobToBase64 } from "./utils/utilts";
+import { blobToBase64, generateFileName } from "./utils/utils";
 import useAudio from "./hooks/useAudio";
 
 // const mimeType = 'video/webm; codecs="opus,vp8"';
@@ -38,14 +37,14 @@ function App() {
     onDataAvailable: onScreenDataAvailable,
     record: recordScreen,
     stop: stopRecordScreen,
-  } = useMediaRecord(screenStream.current);
+  } = useMediaRecord(screenStream.current, "video/webm");
 
   function startRecording() {
     setIntervalDelay(1000);
     setTimeoutDelay(20000);
     recordCamera();
     recordScreen();
-    const cameraRecordId = nanoid();
+    const cameraRecordId = generateFileName();
     let cameraRecordCount = 0;
     onCameraDataAvailable(async (event) => {
       if (typeof event.data === "undefined") return;
@@ -67,7 +66,7 @@ function App() {
       }
     });
 
-    const screenRecordId = nanoid();
+    const screenRecordId = generateFileName();
     let screenRecordCount = 0;
     onScreenDataAvailable(async (event) => {
       if (typeof event.data === "undefined") return;
